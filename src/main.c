@@ -49,6 +49,9 @@ SOFTWARE.
 int main(void)
 {
   int i = 0;
+  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
+GPIOA->MODER |= 0b01<<10*2;
+
 
   /**
   *  IMPORTANT NOTE!
