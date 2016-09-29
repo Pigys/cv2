@@ -68,11 +68,11 @@ GPIOA->BSRRL |=0b1<<5;
 GPIOA->BSRRH |=0b1<<5;
 */
 
-
-GPIOA->MODER &= ~(0b00<<13*2);
-GPIOA->OTYPER &= ~(0b1<<13);
-GPIOA->PUPDR &=  ~(0b00<<13*2);
-
+  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
+GPIOC->MODER &= ~(0b11<<13*2);
+GPIOC->OTYPER &= ~(0b1<<13);
+GPIOC->PUPDR &=  ~(0b11<<13*2);
+button = ((GPIOC -> IDR) & 0b01<<13 );
 
   /**
   *  IMPORTANT NOTE!
