@@ -51,6 +51,8 @@ int main(void)
   int i = 0;
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
 
+  //uloha1
+  /*
 GPIOA->MODER |= 0b01<<5*2;
 GPIOA->OTYPER &= ~(0b1<<5);
 GPIOA->PUPDR |=  0b01<<5*2;
@@ -64,6 +66,14 @@ GPIOA->ODR ^= 0b1<< 5;
 
 GPIOA->BSRRL |=0b1<<5;
 GPIOA->BSRRH |=0b1<<5;
+*/
+
+
+GPIOA->MODER &= ~(0b00<<13*2);
+GPIOA->OTYPER &= ~(0b1<<13);
+GPIOA->PUPDR &=  ~(0b00<<13*2);
+
+
   /**
   *  IMPORTANT NOTE!
   *  See the <system_*.c> file and how/if the SystemInit() function updates 
