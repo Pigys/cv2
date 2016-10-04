@@ -27,8 +27,10 @@ SOFTWARE.
 */
 
 /* Includes */
+
 #include <stddef.h>
 #include "stm32l1xx.h"
+
 
 
 /* Private typedef */
@@ -49,6 +51,10 @@ SOFTWARE.
 int main(void)
 {
   int i = 0;
+  int a = 0;
+  int b = 0;
+  int c = 0;
+  int button=0;
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
 
   //uloha1
@@ -57,7 +63,9 @@ GPIOA->MODER |= 0b01<<5*2;
 GPIOA->OTYPER &= ~(0b1<<5);
 GPIOA->PUPDR |=  0b01<<5*2;
 GPIOA->OSPEEDR |= 0b11<< 5*2;
+*/
 
+  /*
 GPIOA->ODR |= 0b1<< 5;
 GPIOA->ODR &= ~(0b1<< 5);
 
@@ -68,12 +76,32 @@ GPIOA->BSRRL |=0b1<<5;
 GPIOA->BSRRH |=0b1<<5;
 */
 
+  //uloha2
+  /*
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
 GPIOC->MODER &= ~(0b11<<13*2);
 GPIOC->OTYPER &= ~(0b1<<13);
 GPIOC->PUPDR &=  ~(0b11<<13*2);
-button = ((GPIOC -> IDR) & 0b01<<13 );
+*/
 
+  //uloha 3a
+
+  GPIOA->MODER |= 0b01<<5*2;
+  GPIOA->OTYPER &= ~(0b1<<5);
+  GPIOA->PUPDR |=  0b01<<5*2;
+  GPIOA->OSPEEDR |= 0b11<< 5*2;
+  for( a=0;a<20;a++)
+  	  {
+	  	  for (b = 0; b<120000;b++) {
+  		    GPIOA->BSRRL |=0b1<<5;
+	  	  }
+	  	 for (c = 0; c<120000;c++) {
+  			GPIOA->BSRRH |=0b1<<5;
+	  	 }
+
+  	  }
+
+  //uloha 3b
   /**
   *  IMPORTANT NOTE!
   *  See the <system_*.c> file and how/if the SystemInit() function updates 
@@ -97,7 +125,7 @@ button = ((GPIOC -> IDR) & 0b01<<13 );
   /* Infinite loop */
   while (1)
   {
-
+	  button = ((GPIOC -> IDR) & 0b1<<13 ) >> 13;
 	i++;
   }
   return 0;
