@@ -85,7 +85,7 @@ GPIOC->PUPDR &=  ~(0b11<<13*2);
 */
 
   //uloha 3a
-
+/*
   GPIOA->MODER |= 0b01<<5*2;
   GPIOA->OTYPER &= ~(0b1<<5);
   GPIOA->PUPDR |=  0b01<<5*2;
@@ -100,8 +100,20 @@ GPIOC->PUPDR &=  ~(0b11<<13*2);
 	  	 }
 
   	  }
-
+*/
   //uloha 3b
+  GPIOA->MODER |= 0b01<<5*2;
+    GPIOA->OTYPER &= ~(0b1<<5);
+    GPIOA->PUPDR |=  0b01<<5*2;
+    GPIOA->OSPEEDR |= 0b11<< 5*2;
+
+  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
+  GPIOC->MODER &= ~(0b11<<13*2);
+  GPIOC->OTYPER &= ~(0b1<<13);
+  GPIOC->PUPDR &=  ~(0b11<<13*2);
+
+
+
   /**
   *  IMPORTANT NOTE!
   *  See the <system_*.c> file and how/if the SystemInit() function updates 
@@ -126,6 +138,13 @@ GPIOC->PUPDR &=  ~(0b11<<13*2);
   while (1)
   {
 	  button = ((GPIOC -> IDR) & 0b1<<13 ) >> 13;
+	  if(button == 0){
+		  GPIOA->BSRRL |=0b1<<5;
+	  }
+	  else if(button == 1) {
+		  GPIOA->BSRRH |=0b1<<5;
+	  }
+
 	i++;
   }
   return 0;

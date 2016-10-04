@@ -1892,12 +1892,12 @@ OUTPUT(cv2.elf elf32-littlearm)
  .debug_ranges  0x00000178       0x50 src\stm32l1xx_it.o
  .debug_ranges  0x000001c8       0x20 src\system_stm32l1xx.o
 
-.debug_line     0x00000000      0xb98
+.debug_line     0x00000000      0xb63
  .debug_line    0x00000000      0x521 Libraries\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_rcc.o
- .debug_line    0x00000521      0x1fa src\main.o
- .debug_line    0x0000071b       0x7c src\startup_stm32l1xx_hd.o
- .debug_line    0x00000797      0x1e7 src\stm32l1xx_it.o
- .debug_line    0x0000097e      0x21a src\system_stm32l1xx.o
+ .debug_line    0x00000521      0x1c5 src\main.o
+ .debug_line    0x000006e6       0x7c src\startup_stm32l1xx_hd.o
+ .debug_line    0x00000762      0x1e7 src\stm32l1xx_it.o
+ .debug_line    0x00000949      0x21a src\system_stm32l1xx.o
 
 .debug_str      0x00000000      0x914
  .debug_str     0x00000000      0x6b9 Libraries\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_rcc.o
