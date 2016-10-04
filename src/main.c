@@ -56,7 +56,8 @@ int main(void)
   int c = 0;
   int button=0;
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
-
+  int previous = 0;
+  int new = 0;
   //uloha1
   /*
 GPIOA->MODER |= 0b01<<5*2;
@@ -102,6 +103,7 @@ GPIOC->PUPDR &=  ~(0b11<<13*2);
   	  }
 */
   //uloha 3b
+
   GPIOA->MODER |= 0b01<<5*2;
     GPIOA->OTYPER &= ~(0b1<<5);
     GPIOA->PUPDR |=  0b01<<5*2;
@@ -113,6 +115,7 @@ GPIOC->PUPDR &=  ~(0b11<<13*2);
   GPIOC->PUPDR &=  ~(0b11<<13*2);
 
 
+//uloha 3c
 
   /**
   *  IMPORTANT NOTE!
@@ -137,13 +140,20 @@ GPIOC->PUPDR &=  ~(0b11<<13*2);
   /* Infinite loop */
   while (1)
   {
+	  previous = button;
 	  button = ((GPIOC -> IDR) & 0b1<<13 ) >> 13;
+	  /*
 	  if(button == 0){
 		  GPIOA->BSRRL |=0b1<<5;
 	  }
 	  else if(button == 1) {
 		  GPIOA->BSRRH |=0b1<<5;
 	  }
+	  */
+
+	  if((previous == 1)&&(button == 0)){
+		  GPIOA->ODR ^=0b1<<5;
+	  	  }
 
 	i++;
   }
