@@ -55,11 +55,12 @@ int main(void)
   int b = 0;
   int c = 0;
   int button=0;
-  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
+
   int previous = 0;
   int new = 0;
   //uloha1
   /*
+RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE); //spustenie periférie GPIOA
 GPIOA->MODER |= 0b01<<5*2;
 GPIOA->OTYPER &= ~(0b1<<5);
 GPIOA->PUPDR |=  0b01<<5*2;
@@ -67,19 +68,19 @@ GPIOA->OSPEEDR |= 0b11<< 5*2;
 */
 
   /*
-GPIOA->ODR |= 0b1<< 5;
-GPIOA->ODR &= ~(0b1<< 5);
+GPIOA->ODR |= 0b1<< 5; //Zapnutie LED pomocou ODR
+GPIOA->ODR &= ~(0b1<< 5); //Vypnutie LED pomocou ODR
 
-GPIOA->ODR ^= 0b1<< 5;
-GPIOA->ODR ^= 0b1<< 5;
+GPIOA->ODR ^= 0b1<< 5;  // Prepínanie stavu LED pomocou ODR
+GPIOA->ODR ^= 0b1<< 5; // Prepínanie stavu LED pomocou ODR
 
-GPIOA->BSRRL |=0b1<<5;
-GPIOA->BSRRH |=0b1<<5;
+GPIOA->BSRRL |=0b1<<5; // Zapnutie LED pomocou BSRR
+GPIOA->BSRRH |=0b1<<5; // Vypnutie LED pomocou BSRR
 */
 
   //uloha2
-  /*
-  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
+/*
+RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
 GPIOC->MODER &= ~(0b11<<13*2);
 GPIOC->OTYPER &= ~(0b1<<13);
 GPIOC->PUPDR &=  ~(0b11<<13*2);
@@ -87,6 +88,7 @@ GPIOC->PUPDR &=  ~(0b11<<13*2);
 
   //uloha 3a
 /*
+  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE); //spustenie periférie GPIOA
   GPIOA->MODER |= 0b01<<5*2;
   GPIOA->OTYPER &= ~(0b1<<5);
   GPIOA->PUPDR |=  0b01<<5*2;
@@ -103,7 +105,7 @@ GPIOC->PUPDR &=  ~(0b11<<13*2);
   	  }
 */
   //uloha 3b
-
+RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE); //spustenie periférie GPIOA
   GPIOA->MODER |= 0b01<<5*2;
     GPIOA->OTYPER &= ~(0b1<<5);
     GPIOA->PUPDR |=  0b01<<5*2;
@@ -140,16 +142,18 @@ GPIOC->PUPDR &=  ~(0b11<<13*2);
   /* Infinite loop */
   while (1)
   {
+
 	  previous = button;
+
 	  button = ((GPIOC -> IDR) & 0b1<<13 ) >> 13;
-	  /*
+/*
 	  if(button == 0){
 		  GPIOA->BSRRL |=0b1<<5;
 	  }
 	  else if(button == 1) {
 		  GPIOA->BSRRH |=0b1<<5;
 	  }
-	  */
+*/
 
 	  if((previous == 1)&&(button == 0)){
 		  GPIOA->ODR ^=0b1<<5;

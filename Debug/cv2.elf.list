@@ -153,21 +153,22 @@ int main(void)
   int button=0;
  80001ce:	2300      	movs	r3, #0
  80001d0:	61bb      	str	r3, [r7, #24]
-  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
- 80001d2:	2101      	movs	r1, #1
- 80001d4:	2001      	movs	r0, #1
- 80001d6:	f7ff ffd1 	bl	800017c <RCC_AHBPeriphClockCmd>
+
   int previous = 0;
- 80001da:	2300      	movs	r3, #0
- 80001dc:	60bb      	str	r3, [r7, #8]
+ 80001d2:	2300      	movs	r3, #0
+ 80001d4:	60bb      	str	r3, [r7, #8]
   int new = 0;
- 80001de:	2300      	movs	r3, #0
- 80001e0:	607b      	str	r3, [r7, #4]
+ 80001d6:	2300      	movs	r3, #0
+ 80001d8:	607b      	str	r3, [r7, #4]
+	  	 }
 
   	  }
 */
   //uloha 3b
-
+RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE); //spustenie periférie GPIOA
+ 80001da:	2101      	movs	r1, #1
+ 80001dc:	2001      	movs	r0, #1
+ 80001de:	f7ff ffcd 	bl	800017c <RCC_AHBPeriphClockCmd>
   GPIOA->MODER |= 0b01<<5*2;
  80001e2:	4a26      	ldr	r2, [pc, #152]	; (800027c <main+0xc4>)
  80001e4:	4b25      	ldr	r3, [pc, #148]	; (800027c <main+0xc4>)
@@ -220,13 +221,14 @@ int main(void)
  8000240:	f023 6340 	bic.w	r3, r3, #201326592	; 0xc000000
  8000244:	60d3      	str	r3, [r2, #12]
 
-
   /* Infinite loop */
   while (1)
   {
+
 	  previous = button;
  8000246:	69bb      	ldr	r3, [r7, #24]
  8000248:	60bb      	str	r3, [r7, #8]
+
 	  button = ((GPIOC -> IDR) & 0b1<<13 ) >> 13;
  800024a:	4b0d      	ldr	r3, [pc, #52]	; (8000280 <main+0xc8>)
  800024c:	8a1b      	ldrh	r3, [r3, #16]
@@ -237,7 +239,7 @@ int main(void)
 	  else if(button == 1) {
 		  GPIOA->BSRRH |=0b1<<5;
 	  }
-	  */
+*/
 
 	  if((previous == 1)&&(button == 0)){
  8000258:	68bb      	ldr	r3, [r7, #8]
