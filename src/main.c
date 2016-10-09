@@ -142,7 +142,6 @@ RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE); //spustenie periférie GPIOA
   /* Infinite loop */
   while (1)
   {
-
 	  previous = button;
 
 	  button = ((GPIOC -> IDR) & 0b1<<13 ) >> 13;
@@ -154,7 +153,6 @@ RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE); //spustenie periférie GPIOA
 		  GPIOA->BSRRH |=0b1<<5;
 	  }
 */
-
 	  if((previous == 1)&&(button == 0)){
 		  GPIOA->ODR ^=0b1<<5;
 	  	  }
